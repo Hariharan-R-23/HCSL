@@ -20,30 +20,36 @@ export interface BoardMember {
   instagram: string;
   bio: string;
   initials: string;
+  image: string;
 }
 
-export interface UpcomingSession {
+export interface PastSession {
+  sessionNo: string;
   title: string;
-  subtitle: string;
   speaker: {
     name: string;
-    tagline: string;
-    bio: string[];
+    role: string;
     company: string;
-    education: string;
   };
   date: string;
-  time: string;
   mode: string;
-  openFor: string;
-  registrationLink: string;
-  googleMeetLink: string;
+  attendees: string;
+  summary: string;
+  description: string;
+  motto: string;
+  tags: string[];
+  photos: string[];
 }
 
-export interface SubmittedQuestion {
-  id: string;
-  name: string;
-  email: string;
-  question: string;
-  timestamp: string;
+export interface Collaboration {
+  title: string;
+  partner: string;
+  partnerSubtitle: string;
+  overview: string;
+  description: string[];
+  quote: string;
+  callout: string;
+  partnerships: string[];
+  tags: string[];
+  photos: string[];
 }

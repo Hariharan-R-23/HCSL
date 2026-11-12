@@ -14,18 +14,25 @@ import {
   X,
   Mail,
   Instagram,
-  ArrowUp,
-  ExternalLink,
   ChevronRight,
   ShieldCheck,
-  Compass,
   GraduationCap
 } from 'lucide-react';
 
 import { Logo } from './components/Logo';
 import { SessionSection } from './components/SessionSection';
+import { CollaborationSection } from './components/CollaborationSection';
 import { BoardSection } from './components/BoardSection';
 import { CORE_VALUES } from './data';
+
+const NAV_ITEMS = [
+  { label: 'Home', id: 'hero' },
+  { label: 'About', id: 'about' },
+  { label: 'Sessions', id: 'sessions' },
+  { label: 'Collaboration', id: 'collaboration' },
+  { label: 'Executive Board', id: 'board' },
+  { label: 'Contact', id: 'contact' },
+];
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
@@ -38,7 +45,7 @@ export default function App() {
       setScrollY(window.scrollY);
 
       // Determine active section
-      const sections = ['hero', 'about', 'session', 'board', 'contact'];
+      const sections = NAV_ITEMS.map((item) => item.id);
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
@@ -108,13 +115,7 @@ export default function App() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
-              {[
-                { label: 'Home', id: 'hero' },
-                { label: 'About', id: 'about' },
-                { label: 'Upcoming Session', id: 'session' },
-                { label: 'Executive Board', id: 'board' },
-                { label: 'Contact', id: 'contact' },
-              ].map((item) => (
+              {NAV_ITEMS.map((item) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
@@ -170,13 +171,7 @@ export default function App() {
               className="md:hidden bg-zinc-950 border-b border-zinc-900 overflow-hidden"
             >
               <div className="px-4 py-6 space-y-4">
-                {[
-                  { label: 'Home', id: 'hero' },
-                  { label: 'About', id: 'about' },
-                  { label: 'Upcoming Session', id: 'session' },
-                  { label: 'Executive Board', id: 'board' },
-                  { label: 'Contact', id: 'contact' },
-                ].map((item) => (
+                {NAV_ITEMS.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
@@ -217,7 +212,7 @@ export default function App() {
           {/* Tagline Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 mb-6">
             <span className="w-2 h-2 rounded-full bg-brand-red animate-pulse" />
-            <span className="text-xs font-mono text-zinc-400 font-semibold tracking-wide">STREET CAUSE CEB EXTENSION</span>
+            <span className="text-xs font-mono text-zinc-400 font-semibold tracking-wide">STREET CAUSE</span>
           </div>
 
           {/* Subtitle brand header */}
@@ -247,10 +242,10 @@ export default function App() {
           {/* Interactive touch-friendly CTAs */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <button
-              onClick={() => scrollToSection('session')}
+              onClick={() => scrollToSection('sessions')}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-brand-red hover:bg-brand-red-hover text-white font-mono font-semibold text-xs tracking-widest uppercase transition-all shadow-[0_4px_25px_rgba(200,16,46,0.25)] hover:shadow-[0_4px_30px_rgba(200,16,46,0.4)] cursor-pointer"
             >
-              <span>Upcoming Webinar</span>
+              <span>Explore Sessions</span>
               <GraduationCap className="w-4 h-4 text-white" />
             </button>
 
@@ -326,131 +321,60 @@ export default function App() {
         </div>
       </section>
 
-      {/* UPCOMING WEBINEAR SECTION */}
+      {/* SESSIONS SECTION */}
       <SessionSection />
+
+      {/* INSTITUTIONAL COLLABORATION SECTION */}
+      <CollaborationSection />
 
       {/* EXECUTIVE ROSTER SECTION */}
       <BoardSection />
 
-      {/* FAQ & INTERACTIVE VOLUNTEER RESOURCE ZONE */}
+      {/* CONTACT SECTION */}
       <section id="contact" className="py-24 bg-brand-black relative border-t border-zinc-900">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-[100px] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
-            {/* Column 1: Unit details and objective */}
-            <div className="lg:col-span-5 space-y-6">
-              <span className="text-xs font-mono tracking-widest text-brand-red uppercase font-semibold">GET IN TOUCH</span>
-              
-              <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white">
-                Empower Your <span className="text-brand-red">Career</span> Journey
-              </h2>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+          <span className="text-xs font-mono tracking-widest text-brand-red uppercase font-semibold">GET IN TOUCH</span>
 
-              <p className="text-sm text-zinc-400 leading-relaxed font-sans">
-                Whether you have questions about Sree Charith&apos;s upcoming &ldquo;Masters in Abroad&rdquo; session, want to submit study-abroad portfolios for review, or are a volunteer seeking leadership materials, our HCSL Board is ready to assist.
-              </p>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white mt-3 mb-4">
+            Empower Your <span className="text-brand-red">Career</span> Journey
+          </h2>
 
-              {/* Verified Contact Methods */}
-              <div className="space-y-4 pt-4">
-                <a
-                  href="mailto:streetcause@gmail.com"
-                  className="flex items-center gap-4 p-4 bg-zinc-950 hover:bg-zinc-900 border border-zinc-900 rounded-2xl transition-all"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/20 flex items-center justify-center">
-                    <Mail className="w-4 h-4 text-brand-red" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Official Email</p>
-                    <p className="text-sm font-semibold text-white">streetcause@gmail.com</p>
-                  </div>
-                </a>
+          <p className="text-sm text-zinc-400 leading-relaxed font-sans max-w-2xl mx-auto mb-10">
+            Whether you have questions about HCSL&apos;s past and upcoming sessions, want to explore student career opportunities, or are interested in partnering with our unit, reach out to our team directly via email or Instagram.
+          </p>
 
-                <a
-                  href="https://www.instagram.com/streetcause.humancapital/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 p-4 bg-zinc-950 hover:bg-zinc-900 border border-zinc-900 rounded-2xl transition-all"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-brand-red/10 border border-brand-red/20 flex items-center justify-center">
-                    <Instagram className="w-4 h-4 text-brand-red" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Instagram Handler</p>
-                    <p className="text-sm font-semibold text-white">@streetcause.humancapital</p>
-                  </div>
-                </a>
+          {/* Verified Contact Methods */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left max-w-2xl mx-auto">
+            <a
+              href="mailto:streetcause@gmail.com"
+              className="flex items-center gap-4 p-5 bg-zinc-950 hover:bg-zinc-900 border border-zinc-900 rounded-2xl transition-all"
+            >
+              <div className="w-11 h-11 rounded-xl bg-brand-red/10 border border-brand-red/20 flex items-center justify-center flex-shrink-0">
+                <Mail className="w-5 h-5 text-brand-red" />
               </div>
-            </div>
+              <div>
+                <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Official Email</p>
+                <p className="text-sm font-semibold text-white">streetcause@gmail.com</p>
+              </div>
+            </a>
 
-            {/* Column 2: Interactive contact form (stored in state for realistic demonstration) */}
-            <div className="lg:col-span-7 bg-zinc-950 border border-zinc-900 rounded-3xl p-6 sm:p-8 shadow-2xl relative">
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 to-brand-red" />
-              
-              <h3 className="font-display text-xl font-bold text-white mb-2">Connect with HCSL</h3>
-              <p className="text-xs text-zinc-500 mb-6 leading-relaxed">
-                Submit an inquiry directly to the HCSL leadership board. We monitor entries daily to route support.
-              </p>
-
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  alert('Thank you! Your message was received locally. We will follow up via your email.');
-                }}
-                className="space-y-4"
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">Full Name</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="e.g. Sree Charith Alumnus"
-                      className="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-xl text-white text-sm focus:outline-none focus:border-brand-red transition-all"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">Email Address</label>
-                    <input
-                      type="email"
-                      required
-                      placeholder="volunteer@streetcause.org"
-                      className="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-xl text-white text-sm focus:outline-none focus:border-brand-red transition-all"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">Topic of Interest</label>
-                  <select className="w-full px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-xl text-white text-sm focus:outline-none focus:border-brand-red transition-all">
-                    <option>Higher Study Abroad (GRE/TOEFL)</option>
-                    <option>Leadership Development Workshops</option>
-                    <option>Corporate Partnerships & Career Portals</option>
-                    <option>Creative/Media volunteering</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">Your Message</label>
-                  <textarea
-                    required
-                    placeholder="Describe how HCSL can support your academic or professional journey..."
-                    className="w-full h-28 px-4 py-3 bg-zinc-900 border border-zinc-800 rounded-xl text-white text-sm focus:outline-none focus:border-brand-red transition-all resize-none"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-4 rounded-xl bg-brand-red hover:bg-brand-red-hover text-white text-xs font-semibold tracking-wider uppercase transition-all shadow-[0_4px_15px_rgba(200,16,46,0.3)]"
-                >
-                  Submit Inquiry to HCSL Unit
-                </button>
-              </form>
-            </div>
-
+            <a
+              href="https://www.instagram.com/streetcause.humancapital/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-4 p-5 bg-zinc-950 hover:bg-zinc-900 border border-zinc-900 rounded-2xl transition-all"
+            >
+              <div className="w-11 h-11 rounded-xl bg-brand-red/10 border border-brand-red/20 flex items-center justify-center flex-shrink-0">
+                <Instagram className="w-5 h-5 text-brand-red" />
+              </div>
+              <div>
+                <p className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Instagram Handle</p>
+                <p className="text-sm font-semibold text-white">@streetcause.humancapital</p>
+              </div>
+            </a>
           </div>
-
         </div>
       </section>
 
